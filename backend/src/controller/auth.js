@@ -34,7 +34,6 @@ exports.signin = async (req, res) => {
   try {
     if (user) {
       if (user.authenticate(req.body.password)) {
-        console.log(req.body.email);
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
           expiresIn: '1h',
         });
@@ -61,11 +60,4 @@ exports.signin = async (req, res) => {
   } catch (error) {
     return res.status(400).json({ message: error });
   }
-};
-
-exports.requireSignin = (req, res, next) => {
-  const token = req.headers.authorization.split(' ')[1];
-  const user = jwt.verify(token, process.env.JWT_SECRET);
-  req.user = user;
-  next();
 };

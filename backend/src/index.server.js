@@ -1,11 +1,11 @@
 const express = require('express');
 require('dotenv').config();
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // routes
 const adminRoutes = require('./routes/admin/auth');
 const authRoutes = require('./routes/auth');
+const categoryRoutes = require('./routes/category');
 
 const app = express();
 
@@ -21,10 +21,11 @@ mongoose
     console.log('Database Connected');
   });
 
-app.use(bodyParser.json({ extended: true }));
+app.use(express.json());
 
 app.use('/api', authRoutes);
 app.use('/api', adminRoutes);
+app.use('/api', categoryRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
