@@ -1,12 +1,14 @@
 const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
+const path = require('path');
 
 // routes
 const adminRoutes = require('./routes/admin/auth');
 const authRoutes = require('./routes/auth');
 const categoryRoutes = require('./routes/category');
-const productRoutes = require('./routes/product')
+const productRoutes = require('./routes/product');
+const cartRoutes = require('./routes/cart');
 
 const app = express();
 
@@ -23,11 +25,12 @@ mongoose
   });
 
 app.use(express.json());
-
+app.use('/public', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', authRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
+app.use('/api', cartRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -2,10 +2,9 @@ const express = require('express');
 const multer = require('multer');
 const { requireSignin, adminMiddleware } = require('../common-middleware');
 const { createProduct } = require('../controller/product');
-const shortId = require('shortid');
-// const { addCategory, getCategories } = require('../controller/category');
-
 const router = express.Router();
+
+const shortId = require('shortid');
 const path = require('path');
 
 const storage = multer.diskStorage({

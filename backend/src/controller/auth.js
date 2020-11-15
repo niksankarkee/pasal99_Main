@@ -30,13 +30,16 @@ exports.signUp = async (req, res) => {
 
 exports.signin = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-
   try {
     if (user) {
       if (user.authenticate(req.body.password)) {
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-          expiresIn: '1h',
-        });
+        const token = jwt.sign(
+          { _id: user._id, role: user.role },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: '1h',
+          }
+        );
         const { _id, firstName, lastName, email, role, fullName } = user;
         res.status(200).json({
           token,
