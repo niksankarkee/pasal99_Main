@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors');
 
 // routes
 const adminRoutes = require('./routes/admin/auth');
@@ -24,6 +25,7 @@ mongoose
     console.log('Database Connected');
   });
 
+app.use(cors());
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', authRoutes);
