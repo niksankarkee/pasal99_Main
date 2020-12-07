@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const shortid = require('shortid');
 
 exports.signUp = async (req, res) => {
   const { firstName, lastName, username, email, password } = req.body;
@@ -12,16 +13,22 @@ exports.signUp = async (req, res) => {
   const user = await User.create({
     firstName,
     lastName,
-    username,
+    username: shortid.generate(),
     email,
     password,
   });
 
-  if (user) {
-    return res.status(201).json({
-      message: 'User created Successfully..',
-    });
-  } else {
+  try {
+    if (user) {
+      return res.status(201).json({
+        message: 'User created Successfully..',
+      });
+    } else {
+      return res.status(400).json({
+        message: 'Something went wrong',
+      });
+    }
+  } catch (error) {
     return res.status(400).json({
       message: 'Something went wrong',
     });

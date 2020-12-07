@@ -1,6 +1,8 @@
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
+import { Jumbotron, Row, Col, Container } from 'react-bootstrap';
 import Layout from '../../components/Layout';
+import './style.css';
+import { NavLink } from 'react-router-dom';
 
 /**
  * @author  Niksan karkee
@@ -8,14 +10,20 @@ import Layout from '../../components/Layout';
  */
 function Home() {
   return (
-    <Layout>
-      <Jumbotron
+    <Layout sidebar>
+
+      {/* <Jumbotron
         style={{ margin: '5rem', background: '#fff' }}
         className='text-center'
       >
         <h1>Welcome to Admin Dashboard</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, unde! Voluptatem velit doloremque sapiente reiciendis sit totam praesentium culpa, quas cumque quam aliquam reprehenderit incidunt in quia vero? Perferendis, beatae.</p>
-      </Jumbotron>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
+          unde! Voluptatem velit doloremque sapiente reiciendis sit totam
+          praesentium culpa, quas cumque quam aliquam reprehenderit incidunt in
+          quia vero? Perferendis, beatae.
+        </p>
+      </Jumbotron> */}
     </Layout>
   );
 }

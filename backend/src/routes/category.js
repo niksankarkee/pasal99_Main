@@ -23,7 +23,7 @@ router.post(
   '/category/create',
   requireSignin,
   adminMiddleware,
-  upload.single('categoryImg'),
+  upload.single('categoryImage'),
   addCategory
 );
 router.get('/category/getcategory', getCategories);
