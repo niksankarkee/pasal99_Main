@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const shortid = require('shortid');
+const bcrypt = require('bcrypt');
 
 exports.signUp = async (req, res) => {
   const { firstName, lastName, username, email, password } = req.body;
@@ -10,12 +11,13 @@ exports.signUp = async (req, res) => {
       message: 'User already registered',
     });
   }
+  const hash_password = await bcrypt.hash(password, 10);
   const user = await User.create({
     firstName,
     lastName,
     username: shortid.generate(),
     email,
-    password,
+    hash_password,
   });
 
   try {
